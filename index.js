@@ -8,7 +8,11 @@ app.get("/unabbreviate", (req, res) => {
 app.get("/abbreviate", (req, res) => {
   const { valor } = req.query
   const util = require("util-stunks")
+  if (!valor) {
+    res.json({ error: { message: "Você precisa inserir um valor para ser abreviado." } })
+  } else {
   res.json({ result: util.abbreviate(valor) })
+  }
 })
 app.get("/relativeTime", (req, res) => {
   const { time, ms } = req.query;
